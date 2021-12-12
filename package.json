@@ -1,0 +1,23 @@
+{
+  "name": "sugit",
+  "version": "0.1.0",
+  "description": "An prototype",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "bash prepare.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:SmileHackathon/team08.git"
+  },
+  "author": "Keito Takeda",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SmileHackathon/team08/issues"
+  },
+  "homepage": "https://github.com/SmileHackathon/team08#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0"
+  }
+}

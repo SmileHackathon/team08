@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ゲームを選ぼう。ゲームでつながろう。 - </title>
+
+  <link rel="stylesheet" href="./milligram.min.css">
+  <link rel="stylesheet" href="./normalize.css">
+</head>
+<body>
+  <h1>ShareChat/CHA(仮)</h1>
+
+  <main id="app"></main>
+  <script>
+    let USER_ID = Math.random().toString();
+    let allSteamApps = [];
+  </script>
+  <script type="module">
+    /*
+      既知の不具合
+      たぶんカウントを数値ではなくユーザーIDで持つべき
+    */
+    import { h, text, app } from "https://unpkg.com/hyperapp"
+
+    // APIs
+    (async () => {})()
+    fetch("/data/steam_all_apps.json")
+      .then(res => res.json())
+      .then(json => allSteamApps = json.applist.apps);
+
+    const normalizeSearchString = (searchString) => {
+      return searchString
+        .toLowerCase()
+        .replace("@", "a")
+    }
+    const search = async (searchString) => {
+      const searchStrings = searchString.split(/ |　/);
+      console.log(searchStrings);
+      return (
+        allSteamApps
+          .filter(app => {
+            const appName = normalizeSearchString(app.name);
+            return searchStrings.every(token => appName.indexOf(normalizeSearchString(token)) !== -1);
+          })
+      )
+    }
+
+    // UtilstoLowerCase
+    const addGameCount = (game) => ({
+      ...game, approvers: [...game.approvers, USER_ID]
+    });
+
+    const removeGameCount = (game) => ({
+      ...game, approvers: game.approvers.filter(uid => uid !== USER_ID) 
+    });
+
+    const toggleGameCount = (game) => {
+      if (game.approvers.indexOf(USER_ID) !== -1) {
+        const removed = removeGameCount(game);
+        if (removed.approvers.length === 0) {
+          return undefined;
+        } else {
+          return removed;
+        }
+        
+      } else {
+        return addGameCount(game);
+      }
+    };
+
+    // Action
+    const SearchTextChange = (state, event) => {
+      if (event.target.value.length > 2) {
+        search(event.target.value)
+          .then(result => dispatch(SearchResultChange(result)));
+      }
+      return {
+        ...state,
+        searchText: event.target.value
+      }
+    };
+
+    const SearchResultChange = (result) => (state, event) => {
+      return {
+        ...state,
+        searchResult: result.slice(0, 10)
+      }
+    }
+
+    const AddGameToArena = (game) => (state, event) => ({
+      ...state,
+      searchText: "",
+      arena: {
+        ...state.arena,
+        [game.id]: state.arena[game.id] ? addGameCount(state.arena[game.id]) : {...game, approvers: [USER_ID]}
+      }
+    })
+
+    const ToggleGameApprovalState = (game) => (state, event) => ({
+      ...state,
+      arena: {
+        ...state.arena,
+        [game.id]: toggleGameCount(state.arena[game.id])
+      }
+    })
+
+    const dispatch = app({
+      init: {
+        arena: {},
+        recommend: {},
+        searchText: "",
+        searchResult: []
+      },
+      view: ({arena, recommend, searchText, searchResult}) => (
+        console.log(arena, recommend, searchResult, searchResult) || 
+        h("main", {}, [
+          h("div", {className: "arena"}, 
+            Object.entries(arena).filter(([key, game]) => key && game).map(([key, game]) => h("li", {}, [
+              h("button", {onclick: ToggleGameApprovalState(game)}, [text(game.name)])
+            ]))
+          ),
+          h("div", {className: "recommend"}, [
+            
+          ]),
+          h("div", {className: "search"}, [
+            h("h2", {}, [text("Search")]),
+            h("input", {type: "text", value: searchText, oninput: SearchTextChange}),
+            h("h3", {}, [text("result:")]),
+            h("ul", {}, searchResult.map(game => h("li", {}, [
+              h("button", {onclick: AddGameToArena(game)}, [text(game.name)])
+            ])))
+          ])
+        ])
+      ),
+      node: document.getElementById("app")
+    });
+    /*
+    app({
+      init: { todos: [], value: "" },
+      view: ({ todos, value }) =>
+        h("main", {}, [
+          w
+          h("ul", {},
+            todos.map((todo) => h("li", {}, text(todo)))
+          ),
+          h("input", { type: "text", oninput: (state), value }),
+          h("button", { onclick: AddTodo }, text("New!"))
+        ]),
+      node: document.getElementById("app"),
+    })
+    */
+  </script>
+</body>
+</html>
