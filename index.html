@@ -60,7 +60,7 @@
       if (game.approvers.indexOf(USER_ID) !== -1) {
         const removed = removeGameCount(game);
         if (removed.approvers.length === 0) {
-          return undefined;
+          return null;
         } else {
           return removed;
         }
@@ -94,7 +94,7 @@
       searchText: "",
       arena: {
         ...state.arena,
-        [game.id]: state.arena[game.id] ? addGameCount(state.arena[game.id]) : {...game, approvers: [USER_ID]}
+        [game.appid]: state.arena[game.appid] ? addGameCount(state.arena[game.appid]) : {...game, approvers: [USER_ID]}
       }
     })
 
@@ -102,7 +102,7 @@
       ...state,
       arena: {
         ...state.arena,
-        [game.id]: toggleGameCount(state.arena[game.id])
+        [game.appid]: toggleGameCount(state.arena[game.appid])
       }
     })
 
