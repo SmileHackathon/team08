@@ -3,11 +3,15 @@ package main
 import "github.com/gin-gonic/gin"
 
 func main() {
+
+	// Gin
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
+	r.GET("/", func(c *gin.Context) {
+		keyword := c.Query("keyword")
 		c.JSON(200, gin.H{
-			"message": "pong",
+			"message": keyword,
 		})
 	})
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+
+	r.Run() // Run Gin
 }
