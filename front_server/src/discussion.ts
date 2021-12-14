@@ -44,6 +44,18 @@ const changeDiscussion = async (
   }
   switch (action.action) {
     case "addGameToArena":
+      if (baseDiscussion.item[action.game.id]) {
+        return updateDiscussion(discussionId, {
+          ...baseDiscussion,
+          item: {
+            ...baseDiscussion.item,
+            [action.game.id]: {
+              ...baseDiscussion.item[action.game.id],
+              approver: { [action.user]: true },
+            },
+          },
+        });
+      }
       return updateDiscussion(discussionId, {
         ...baseDiscussion,
         item: {

@@ -8,7 +8,7 @@ const getGameMetaData = async (appid: string) => {
       "https://placehold.jp/43ba57/ffffff/1280x720.png",
     ],
     url: "https://google.com/",
-    id: "steam_19283",
+    id: appid,
   };
 };
 
