@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import {
@@ -6,6 +6,7 @@ import {
   createDiscussion,
   getDiscussion,
 } from "./discussion";
+import getSteamGameMetaData from "./steam";
 
 const app = express();
 const httpServer = createServer(app);
@@ -60,6 +61,21 @@ io.on("connection", (socket) => {
         ack({ error: error });
       });
   });
+});
+
+app.get("/get_metadata/:univ_app_id", (req, res) => {
+  const [service, id] = req.params.univ_app_id.split("__");
+  switch (service) {
+    case "steam":
+      getSteamGameMetaData(parseInt(id))
+        .then((result) => {
+          res.send(result);
+        })
+        .catch((result) => {
+          res.status(404);
+          res.send(result);
+        });
+  }
 });
 
 console.log("running");
