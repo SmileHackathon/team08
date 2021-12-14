@@ -7,8 +7,8 @@
     "preview": "vite preview",
     "prepare": "./bin/prepare.sh",
     "component": "./bin/create_component.sh",
-    "fix": "npx stylelint --fix **/*.css && eslint --no-error-on-unmatched-pattern --fix src/**/*{.ts,.js}{x,} && prettier --no-error-on-unmatched-pattern -w src/**/*{.ts,.js}{x,}",
-    "check": "npx stylelint --mw 0 **/*.css && eslint --no-error-on-unmatched-pattern src/**/*{.ts,.js}{x,} && tsc --noEmit"
+    "fix": "stylelint --fix **/*.css && eslint --no-error-on-unmatched-pattern --fix src/**/*{.ts,.js}{x,} && prettier --no-error-on-unmatched-pattern -w src/**/*{.ts,.js}{x,}",
+    "check": "stylelint --mw 0 **/*.css && eslint --no-error-on-unmatched-pattern src/**/*{.ts,.js}{x,} && tsc --noEmit"
   },
   "dependencies": {
     "classnames": "^2.3.1",
