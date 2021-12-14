@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sed -xeu
+set -xeu
 
 # front build
-npm -w run build
+npm -w front run build
