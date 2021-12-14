@@ -27,6 +27,7 @@ export default function useDiscussion(discussId: string) {
           y: 10,
         },
       },
+      stateHash: "init",
     });
   }, [discussId]);
 

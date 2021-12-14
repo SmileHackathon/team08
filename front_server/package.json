@@ -1,10 +1,15 @@
 {
   "name": "sugit_front_server",
   "version": "0.1.0",
-  "main": "index.js",
-  "scripts": {},
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
   "author": "",
   "dependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.11.12",
     "express": "^4.17.1",
     "socket.io": "^4.4.0",
     "typescript": "^4.5.4"
