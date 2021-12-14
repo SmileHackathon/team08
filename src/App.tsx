@@ -8,8 +8,8 @@ function App() {
   return (
     <Routes>
       <Route path="/">
-        <Route index element={<Main />} />
-        <Route path="app" element={<Main />} />
+        <Route index element={<ComponentsTest />} />
+        <Route path="discussion/:discussId" element={<Main />} />
         <Route path="components_test" element={<ComponentsTest />} />
       </Route>
     </Routes>
