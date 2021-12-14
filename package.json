@@ -1,39 +1,13 @@
 {
-  "name": "sugit",
-  "version": "0.0.0",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "prepare": "./bin/prepare.sh",
-    "component": "./bin/create_component.sh",
-    "fix": "stylelint --fix **/*.css && eslint --no-error-on-unmatched-pattern --fix src/**/*{.ts,.js}{x,} && prettier --no-error-on-unmatched-pattern -w src/**/*{.ts,.js}{x,}",
-    "check": "stylelint --mw 0 **/*.css && eslint --no-error-on-unmatched-pattern src/**/*{.ts,.js}{x,} && tsc --noEmit"
-  },
-  "dependencies": {
-    "classnames": "^2.3.1",
-    "normalize.css": "^8.0.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router": "^6.1.1",
-    "react-router-dom": "^6.1.1",
-    "recoil": "^0.5.2",
-    "swiper": "^7.3.2"
-  },
-  "devDependencies": {
-    "@types/react": "^17.0.33",
-    "@types/react-dom": "^17.0.10",
-    "@types/swiper": "^5.4.3",
-    "@typescript-eslint/eslint-plugin": "^5.6.0",
-    "@typescript-eslint/parser": "^5.6.0",
-    "@vitejs/plugin-react": "^1.0.7",
-    "eslint": "^8.4.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-react": "^7.27.1",
-    "prettier": "^2.5.1",
-    "stylelint": "^14.1.0",
-    "stylelint-config-standard": "^24.0.0",
-    "typescript": "^4.4.4",
-    "vite": "^2.7.2"
-  }
+    "name": "sugit",
+    "version": "0.1.0",
+    "scripts": {
+        "prepare": "./bin/prepare.sh",
+        "build": "./bin/bulid.sh",
+        "check": "npm -w front run check"
+    },
+    "private": true,
+    "workspaces": [
+        "front"
+    ]
 }
