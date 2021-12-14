@@ -1,25 +1,4 @@
-import { Discussion } from "sugit_types/discussion";
-import { GameMetaData } from "sugit_types/game";
-
-type DiscussionUpdateAction = { baseStateHash: string } & (
-  | {
-      action: "addGameToArena";
-      game: GameMetaData;
-      user: string;
-      x: number;
-      y: number;
-    }
-  | {
-      action: "approveGame";
-      game_id: string;
-      user: string;
-    }
-  | {
-      action: "disApproveGame";
-      game_id: string;
-      user: string;
-    }
-);
+import { Discussion, DiscussionUpdateAction } from "sugit_types/discussion";
 
 const discussionMapTempolary = new Map<string, Discussion>();
 
@@ -58,10 +37,10 @@ const changeDiscussion = async (
 ) => {
   const baseDiscussion = await getDiscussion(discussionId);
   if (!baseDiscussion) {
-    throw "NoSuchDiscussion";
+    throw "NO_SUCH_OBJECT";
   }
   if (action.baseStateHash !== baseDiscussion.stateHash) {
-    throw "UpdateYourState";
+    throw "ALREADY_CHANGED";
   }
   switch (action.action) {
     case "addGameToArena":
@@ -100,7 +79,7 @@ const changeDiscussion = async (
         },
       });
   }
-  throw "NoSuchAction";
+  throw "UNDEFINED_ACTION";
 };
 
 export { createDiscussion, getDiscussion, changeDiscussion };

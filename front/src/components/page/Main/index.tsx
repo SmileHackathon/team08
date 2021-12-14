@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router";
-import useDiscussion from "../../../hooks/useDiscussion";
+import useDiscussion from "../../../hooks/useDiscussionRTC";
 
 import DiscussionBoard from "../../model/discussion/DiscussionBoard";
 import SearchPanel from "../../ui/SearchPanel";
@@ -16,12 +16,16 @@ export default function Main() {
 
   const discussionBoard = useDiscussion(discussId);
 
+  if (discussionBoard.error) {
+    return <div>接続失敗({discussionBoard.error})</div>;
+  }
+
   return (
     <div className={styles.main}>
       <div className={styles.leftPane}>
-        {discussionBoard ? (
+        {discussionBoard.discussion ? (
           <DiscussionBoard
-            discussion={discussionBoard}
+            discussion={discussionBoard.discussion}
             className={styles.board}
           />
         ) : (

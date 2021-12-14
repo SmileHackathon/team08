@@ -11,7 +11,7 @@ const app = express();
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
-  cors: { origin: "https://amritb.github.io", methods: ["GET", "POST"] },
+  cors: { origin: "*", methods: ["GET", "POST"] },
 });
 
 // 変えるな
@@ -31,12 +31,15 @@ io.on("connection", (socket) => {
   });
   socket.on("join_discussion", ({ discussion_id }, ack) => {
     socket.join(discussionIdToRoomId(discussion_id));
-    ack();
+    ack({});
   });
 
   socket.on("get_discussion", ({ discussion_id }, ack) => {
     getDiscussion(discussion_id)
       .then((discussion) => {
+        if (!discussion) {
+          ack({ error: "CONNECTION_ERROR" });
+        }
         ack({ discussion: discussion });
       })
       .catch((error) => {
@@ -48,7 +51,7 @@ io.on("connection", (socket) => {
     changeDiscussion(discussionIdToRoomId(discussion_id), action)
       .then(() => {
         io.to("discussion").emit("updated");
-        ack();
+        ack({});
       })
       .catch((error) => {
         ack({ error: error });
