@@ -48,9 +48,12 @@ io.on("connection", (socket) => {
   });
 
   socket.on("update_discussion", ({ discussion_id, action }, ack) => {
-    changeDiscussion(discussionIdToRoomId(discussion_id), action)
-      .then(() => {
-        io.to("discussion").emit("updated");
+    changeDiscussion(discussion_id, action)
+      .then((discussion) => {
+        io.to(discussionIdToRoomId(discussion_id)).emit("updated", {
+          discussion_id: discussion_id,
+          discussion: discussion,
+        });
         ack({});
       })
       .catch((error) => {

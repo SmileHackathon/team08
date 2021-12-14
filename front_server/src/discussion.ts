@@ -34,7 +34,7 @@ const updateDiscussion = async (
 const changeDiscussion = async (
   discussionId: string,
   action: DiscussionUpdateAction
-) => {
+): Promise<Discussion> => {
   const baseDiscussion = await getDiscussion(discussionId);
   if (!baseDiscussion) {
     throw "NO_SUCH_OBJECT";

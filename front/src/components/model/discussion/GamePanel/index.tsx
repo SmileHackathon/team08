@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { Autoplay, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { GameMetaData } from "sugit_types/game";
@@ -9,9 +9,15 @@ import "swiper/css/pagination";
 
 import styles from "./styles.module.css";
 
-export default function GamePanel({ game }: { game: GameMetaData }) {
+export default function GamePanel({
+  game,
+  style,
+}: {
+  game: GameMetaData;
+  style?: CSSProperties;
+}) {
   return (
-    <Panel className={styles.panel}>
+    <Panel className={styles.panel} style={style}>
       <Swiper
         modules={[Autoplay, Pagination]}
         width={320}

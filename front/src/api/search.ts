@@ -1,17 +1,22 @@
-type SteamAppMetaData = {
-  appid: number;
+import steamAPIFile from "./steam_all_apps.json?url";
+
+export type GameSearchResultItem = {
+  appid: string;
   name: string;
 };
 
-let allSteamApps: SteamAppMetaData[];
+//const allSteamApps: GameSearchResultItem[] = steamAPIFile["applist"]["apps"];
 
-fetch("/data/steam_all_apps.json")
+let allSteamApps: GameSearchResultItem[] = [];
+
+fetch(steamAPIFile)
   .then((res) => res.json())
   .then((json) => (allSteamApps = json.applist.apps));
 
 const normalizeSearchString = (searchString: string) => {
   return searchString.toLowerCase().replace("@", "a");
 };
+
 export default async function search(searchString: string) {
   // eslint-disable-next-line no-irregular-whitespace
   const searchStrings = searchString.split(/ |　/);

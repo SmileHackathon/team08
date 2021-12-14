@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { Socket } from "socket.io-client";
-import { createRTC } from "../api/rtc";
+import { RTC, createRTC } from "../api/rtc";
 import { Discussion } from "sugit_types/discussion";
+import { GameMetaData } from "sugit_types/game";
 import discussionBoardState from "../components/atoms/DiscussionBoardAtom";
 
 type DiscussionRTC = {
   isConnected: boolean;
   discussion: Discussion | null;
   error: string | null;
+  addGameToArena: (game: GameMetaData) => void;
 };
 
 export default function useDiscussionRTC(
@@ -18,6 +20,8 @@ export default function useDiscussionRTC(
   const [discussion, setDiscussion] = useState<Discussion | null>(null);
 
   const [error, setError] = useState<string | null>(null);
+
+  const rtcRef = useRef<RTC | null>(null);
 
   useEffect(() => {
     setError(null);
@@ -47,12 +51,39 @@ export default function useDiscussionRTC(
 
       setError("サーバーに接続できませんでした");
     });
+    socket.on(
+      "updated",
+      ({ discussion_id: received_discussion_id, discussion }) => {
+        console.log("updated", received_discussion_id, discussion);
+        if (received_discussion_id !== discussId) {
+          return;
+        }
+        setDiscussion(discussion);
+      }
+    );
+
+    rtcRef.current = rtc;
   }, [discussId]);
+
+  const addGameToArena = (game: GameMetaData) => {
+    if (!discussId || !discussion) {
+      return;
+    }
+    rtcRef.current?.updateDiscussion(discussId, {
+      action: "addGameToArena",
+      game: game,
+      x: Math.random(),
+      y: Math.random(),
+      baseStateHash: discussion?.stateHash,
+      user: rtcRef.current.socket.id, // TODO: なにかしらの永続化ID
+    });
+  };
 
   return {
     isConnected,
     discussion,
     error,
+    addGameToArena,
   };
 }
 

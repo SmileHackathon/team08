@@ -1,14 +1,20 @@
 import classNames from "classnames";
-import React, { ReactNode } from "react";
+import React, { CSSProperties, ReactNode } from "react";
 
 import styles from "./styles.module.css";
 
 export default function Panel({
   children,
   className,
+  style,
 }: {
   children?: ReactNode;
   className?: string;
+  style?: CSSProperties;
 }) {
-  return <div className={classNames(styles.panel, className)}>{children}</div>;
+  return (
+    <div className={classNames(styles.panel, className)} style={style}>
+      {children}
+    </div>
+  );
 }

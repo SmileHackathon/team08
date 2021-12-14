@@ -15,7 +15,11 @@ export default function DiscussionBoard({
   return (
     <Board className={className}>
       {Object.values(discussion.item).map((item) => (
-        <GamePanel key={item.game.id} game={item.game} />
+        <GamePanel
+          key={item.game.id}
+          game={item.game}
+          style={{ left: `item.x` }}
+        />
       ))}
     </Board>
   );

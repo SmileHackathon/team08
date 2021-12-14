@@ -19,12 +19,14 @@
     "react-router-dom": "^6.1.1",
     "recoil": "^0.5.2",
     "socket.io-client": "^4.4.0",
-    "swiper": "^7.3.2"
+    "swiper": "^7.3.2",
+    "throttle-debounce": "^3.0.1"
   },
   "devDependencies": {
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@types/swiper": "^5.4.3",
+    "@types/throttle-debounce": "^2.1.0",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
     "@vitejs/plugin-react": "^1.0.7",
