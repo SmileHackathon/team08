@@ -1,5 +1,5 @@
 import React from "react";
-import { Discussion } from "../../../../types/discussion";
+import { Discussion } from "sugit_types/discussion";
 import Board from "../../../ui/Board";
 import GamePanel from "../GamePanel";
 

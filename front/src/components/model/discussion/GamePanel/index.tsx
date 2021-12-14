@@ -1,7 +1,7 @@
 import React from "react";
 import { Autoplay, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { GameMetaData } from "../../../../types/game";
+import { GameMetaData } from "sugit_types/game";
 import Panel from "../../../ui/Panel";
 
 import "swiper/css";
