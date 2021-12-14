@@ -16,5 +16,7 @@
 }
 
 .board {
+  position: relative;
   aspect-ratio: calc(16 / 9);
+  max-height: 100%;
 }
