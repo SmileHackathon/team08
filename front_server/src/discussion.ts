@@ -51,23 +51,29 @@ const changeDiscussion = async (
             ...baseDiscussion.item,
             [action.game.id]: {
               ...baseDiscussion.item[action.game.id],
-              approver: { [action.user]: true },
+              approver: {
+                ...baseDiscussion.item[action.game.id].approver,
+                [action.user]: true,
+              },
+            },
+          },
+        });
+      } else {
+        return updateDiscussion(discussionId, {
+          ...baseDiscussion,
+          item: {
+            ...baseDiscussion.item,
+            [action.game.id]: {
+              game: action.game,
+              approver: {
+                [action.user]: true,
+              },
+              x: action.x,
+              y: action.y,
             },
           },
         });
       }
-      return updateDiscussion(discussionId, {
-        ...baseDiscussion,
-        item: {
-          ...baseDiscussion.item,
-          [action.game.id]: {
-            game: action.game,
-            approver: { [action.user]: true },
-            x: action.x,
-            y: action.y,
-          },
-        },
-      });
     case "approveGame":
       return updateDiscussion(discussionId, {
         ...baseDiscussion,
@@ -75,7 +81,10 @@ const changeDiscussion = async (
           ...baseDiscussion.item,
           [action.game_id]: {
             ...baseDiscussion.item[action.game_id],
-            approver: { [action.user]: true },
+            approver: {
+              ...baseDiscussion.item[action.game_id].approver,
+              [action.user]: true,
+            },
           },
         },
       });
@@ -86,7 +95,10 @@ const changeDiscussion = async (
           ...baseDiscussion.item,
           [action.game_id]: {
             ...baseDiscussion.item[action.game_id],
-            approver: { [action.user]: false },
+            approver: {
+              ...baseDiscussion.item[action.game_id].approver,
+              [action.user]: true,
+            },
           },
         },
       });
