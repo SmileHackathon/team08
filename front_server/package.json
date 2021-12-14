@@ -1,0 +1,12 @@
+{
+  "name": "sugit_front_server",
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^4.4.0",
+    "typescript": "^4.5.4"
+  }
+}
