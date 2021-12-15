@@ -3,11 +3,12 @@
     "version": "0.1.0",
     "scripts": {
         "prepare": "./bin/prepare.sh",
-        "build": "./bin/bulid.sh",
+        "build": "./bin/build.sh",
         "check": "npm -w front run check"
     },
     "private": true,
     "workspaces": [
-        "front"
+        "front",
+        "front_server"
     ]
 }
