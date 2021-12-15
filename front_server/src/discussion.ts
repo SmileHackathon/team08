@@ -102,6 +102,18 @@ const changeDiscussion = async (
           },
         },
       });
+    case "moveGame":
+      return updateDiscussion(discussionId, {
+        ...baseDiscussion,
+        item: {
+          ...baseDiscussion.item,
+          [action.game_id]: {
+            ...baseDiscussion.item[action.game_id],
+            x: action.x,
+            y: action.y,
+          },
+        },
+      });
   }
   throw "UNDEFINED_ACTION";
 };

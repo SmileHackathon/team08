@@ -7,7 +7,7 @@ export default function ListItem({
   onClick,
 }: {
   children: ReactNode;
-  onClick: () => any;
+  onClick?: () => any;
 }) {
   return (
     <div className={styles.suggest} onClick={onClick}>

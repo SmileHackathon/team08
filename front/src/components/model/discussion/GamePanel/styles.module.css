@@ -1,13 +1,14 @@
 .wrapper {
   position: absolute;
 }
-
 .panel {
   position: relative;
   width: 320px;
   height: 180px;
   overflow: hidden;
   box-sizing: content-box;
+  user-select: none;
+  pointer-events: none;
 }
 
 .image {

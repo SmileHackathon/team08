@@ -5,13 +5,14 @@ import useDiscussion from "../../../hooks/useDiscussionRTC";
 import { debounce } from "throttle-debounce";
 import { getGameMetaData } from "../../../api/game";
 
-import DiscussionBoard from "../../model/discussion/DiscussionBoard";
 import SearchPanel from "../../ui/SearchPanel";
 
 import styles from "./styles.module.css";
-import ListItem from "../../ui/ListItem";
-import GameThumbnail from "../../model/discussion/GameThumbnail";
 import GameSuggest from "../../model/discussion/GameSuggest";
+import Badge from "../../ui/Badge";
+import Board from "../../ui/Board";
+import GamePanel from "../../model/discussion/GamePanel";
+import Draggable from "react-draggable";
 
 const debouncedSearch = debounce(
   1000,
@@ -36,11 +37,11 @@ const debouncedSearch = debounce(
 export default function Main() {
   const { discussId } = useParams();
 
+  const discussionBoard = useDiscussion(discussId ?? null);
+
   const [searchString, setSearchString] = useState("");
   const [searchResult, setSearchResult] = useState<GameSearchResultItem[]>([]);
   const [searchError, setSearchError] = useState<string | null>(null);
-
-  const discussionBoard = useDiscussion(discussId ?? null);
 
   const onSearchStringChange = (next: string) => {
     console.log("onsearchstringchange");
@@ -66,6 +67,12 @@ export default function Main() {
     discussionBoard.addGameToArena(gameMetaData);
   };
 
+  const onDragged =
+    (id: string) =>
+    (e: any, { x, y }: { x: number; y: number }) => {
+      discussionBoard.moveGame(id, { x, y });
+    };
+
   if (!discussId) {
     return <div>ディスカッションIDが指定されていません</div>;
   }
@@ -78,10 +85,21 @@ export default function Main() {
     <div className={styles.main}>
       <div className={styles.leftPane}>
         {discussionBoard.discussion ? (
-          <DiscussionBoard
-            discussion={discussionBoard.discussion}
-            className={styles.board}
-          />
+          <Board className={styles.board}>
+            {Object.values(discussionBoard.discussion.item).map((item) => (
+              <Draggable
+                key={item.game.id}
+                position={{ x: item.x, y: item.y }}
+                onStop={onDragged(item.game.id)}
+              >
+                <GamePanel game={item.game} className={styles.gamePanel}>
+                  <Badge color="#ff3333">
+                    {Object.values(item.approver).filter((b) => b).length}
+                  </Badge>
+                </GamePanel>
+              </Draggable>
+            ))}
+          </Board>
         ) : (
           `ホワイトボードを読み込んでいます(${discussId})...`
         )}

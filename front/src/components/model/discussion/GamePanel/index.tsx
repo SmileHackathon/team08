@@ -1,4 +1,9 @@
-import React, { CSSProperties, ReactNode } from "react";
+import React, {
+  CSSProperties,
+  DOMAttributes,
+  MouseEventHandler,
+  ReactNode,
+} from "react";
 import { Autoplay, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { GameMetaData } from "sugit_types/game";
@@ -15,14 +20,20 @@ export default function GamePanel({
   className,
   style,
   children,
+  onMouseDown,
 }: {
   game: GameMetaData;
   className?: string;
   style?: CSSProperties;
   children?: ReactNode;
+  onMouseDown?: MouseEventHandler<HTMLDivElement>;
 }) {
   return (
-    <div className={classNames(styles.wrapper, className)} style={style}>
+    <div
+      className={classNames(styles.wrapper, className)}
+      style={style}
+      onMouseDown={onMouseDown}
+    >
       <Panel className={styles.panel}>
         <Swiper
           modules={[Autoplay, Pagination]}

@@ -11,6 +11,7 @@ type DiscussionRTC = {
   discussion: Discussion | null;
   error: string | null;
   addGameToArena: (game: GameMetaData) => void;
+  moveGame: (gameId: string, pos: { x: number; y: number }) => void;
 };
 
 export default function useDiscussionRTC(
@@ -79,11 +80,26 @@ export default function useDiscussionRTC(
     });
   };
 
+  const moveGame = (gameId: string, { x, y }: { x: number; y: number }) => {
+    if (!discussId || !discussion) {
+      return;
+    }
+
+    rtcRef.current?.updateDiscussion(discussId, {
+      action: "moveGame",
+      game_id: gameId,
+      x: x,
+      y: y,
+      baseStateHash: discussion?.stateHash,
+    });
+  };
+
   return {
     isConnected,
     discussion,
     error,
     addGameToArena,
+    moveGame,
   };
 }
 
