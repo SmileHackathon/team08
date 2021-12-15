@@ -2,7 +2,7 @@
 
 interface ImportMetaEnv {
   // その他の環境変数...
-  readonly FRONT_SERVER: string;
+  readonly VITE_FRONT_SERVER: string;
 }
 
 interface ImportMeta {

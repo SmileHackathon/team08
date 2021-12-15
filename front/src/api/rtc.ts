@@ -49,7 +49,7 @@ export class RTC {
 }
 
 const createRTC = (): RTC => {
-  return new RTC(io(import.meta.env.FRONT_SERVER));
+  return new RTC(io(import.meta.env.VITE_FRONT_SERVER));
 };
 
 export { createRTC };

@@ -3,6 +3,7 @@ import cors from "cors";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import dotenv from "dotenv";
+import {readFileSync} from "fs"
 import {
   changeDiscussion,
   createDiscussion,
@@ -11,6 +12,13 @@ import {
 import getSteamGameMetaData from "./steam";
 
 dotenv.config();
+
+if (process.env.mode === "development") {
+  const envConfig = dotenv.parse(readFileSync('.env.development'));
+  for (const k in envConfig) {
+    process.env[k] = envConfig[k]
+  }
+}
 
 const app = express();
 const httpServer = createServer(app);
