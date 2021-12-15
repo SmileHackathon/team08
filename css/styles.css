@@ -178,6 +178,15 @@ p {
 
 /* Main Content Base */
 
-#logo {
+.logo {
     text-align : center;
+    margin: 0;
+    padding:0 0 0 0:
+}
+
+.Center_text {
+    text-align : center;
+    width : 80%
+    margin: 0 0 auto auto;
+    padding: 0 0 0 0:
 }
