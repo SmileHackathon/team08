@@ -9,6 +9,7 @@
     "private": true,
     "workspaces": [
         "front",
-        "front_server"
+        "front_server",
+        "types"
     ]
 }
