@@ -39,30 +39,40 @@ const changeDiscussion = async (
   if (!baseDiscussion) {
     throw "NO_SUCH_OBJECT";
   }
-  if (action.baseStateHash !== baseDiscussion.stateHash) {
+  return updateDiscussion(
+    discussionId,
+    applyDiscussionUpdateAction(baseDiscussion, action)
+  );
+};
+
+const applyDiscussionUpdateAction = (
+  base: Discussion,
+  action: DiscussionUpdateAction
+) => {
+  if (action.baseStateHash !== base.stateHash) {
     throw "ALREADY_CHANGED";
   }
   switch (action.action) {
     case "addGameToArena":
-      if (baseDiscussion.item[action.game.id]) {
-        return updateDiscussion(discussionId, {
-          ...baseDiscussion,
+      if (base.item[action.game.id]) {
+        return {
+          ...base,
           item: {
-            ...baseDiscussion.item,
+            ...base.item,
             [action.game.id]: {
-              ...baseDiscussion.item[action.game.id],
+              ...base.item[action.game.id],
               approver: {
-                ...baseDiscussion.item[action.game.id].approver,
+                ...base.item[action.game.id].approver,
                 [action.user]: true,
               },
             },
           },
-        });
+        };
       } else {
-        return updateDiscussion(discussionId, {
-          ...baseDiscussion,
+        return {
+          ...base,
           item: {
-            ...baseDiscussion.item,
+            ...base.item,
             [action.game.id]: {
               game: action.game,
               approver: {
@@ -72,48 +82,48 @@ const changeDiscussion = async (
               y: action.y,
             },
           },
-        });
+        };
       }
     case "approveGame":
-      return updateDiscussion(discussionId, {
-        ...baseDiscussion,
+      return {
+        ...base,
         item: {
-          ...baseDiscussion.item,
+          ...base.item,
           [action.game_id]: {
-            ...baseDiscussion.item[action.game_id],
+            ...base.item[action.game_id],
             approver: {
-              ...baseDiscussion.item[action.game_id].approver,
+              ...base.item[action.game_id].approver,
               [action.user]: true,
             },
           },
         },
-      });
+      };
     case "disApproveGame":
-      return updateDiscussion(discussionId, {
-        ...baseDiscussion,
+      return {
+        ...base,
         item: {
-          ...baseDiscussion.item,
+          ...base.item,
           [action.game_id]: {
-            ...baseDiscussion.item[action.game_id],
+            ...base.item[action.game_id],
             approver: {
-              ...baseDiscussion.item[action.game_id].approver,
+              ...base.item[action.game_id].approver,
               [action.user]: true,
             },
           },
         },
-      });
+      };
     case "moveGame":
-      return updateDiscussion(discussionId, {
-        ...baseDiscussion,
+      return {
+        ...base,
         item: {
-          ...baseDiscussion.item,
+          ...base.item,
           [action.game_id]: {
-            ...baseDiscussion.item[action.game_id],
+            ...base.item[action.game_id],
             x: action.x,
             y: action.y,
           },
         },
-      });
+      };
   }
   throw "UNDEFINED_ACTION";
 };
