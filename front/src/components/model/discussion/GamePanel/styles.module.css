@@ -5,6 +5,7 @@
 .panel {
   position: relative;
   width: 320px;
+  height: 180px;
   overflow: hidden;
   box-sizing: content-box;
 }
@@ -12,7 +13,7 @@
 .image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .pagination {

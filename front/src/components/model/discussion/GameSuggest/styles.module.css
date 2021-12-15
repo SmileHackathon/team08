@@ -1,0 +1,14 @@
+.suggest {
+  display: flex;
+}
+
+.name {
+  flex-grow: 1;
+}
+
+.thumbnail {
+  flex: 0 0;
+  width: 60px;
+  height: auto;
+  object-fit: contain;
+}

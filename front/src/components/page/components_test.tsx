@@ -1,6 +1,6 @@
 import React from "react";
 import SearchPanel from "../ui/SearchPanel";
-import SearchPanelSuggest from "../ui/SearchPanelSuggest";
+import ListItem from "../ui/ListItem";
 import Board from "../ui/Board";
 import GamePanel from "../model/discussion/GamePanel";
 
@@ -10,9 +10,9 @@ export default function ComponentsTest() {
       <h1>Components test</h1>
       <h2>SearchPanel</h2>
       <SearchPanel>
-        <SearchPanelSuggest>Candidate A</SearchPanelSuggest>
-        <SearchPanelSuggest>Candidate B</SearchPanelSuggest>
-        <SearchPanelSuggest>Candidate C</SearchPanelSuggest>
+        <ListItem>Candidate A</ListItem>
+        <ListItem>Candidate B</ListItem>
+        <ListItem>Candidate C</ListItem>
       </SearchPanel>
       <h2>Board</h2>
       <Board>

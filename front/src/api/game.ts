@@ -1,15 +1,25 @@
-const getGameMetaData = async (appid: string) => {
-  return {
-    name: "Game for DEMO",
-    thumbnail: "https://placehold.jp/1280x720.png",
-    images: [
-      "https://placehold.jp/50538f/ffffff/1280x720.png",
-      "https://placehold.jp/ac43ba/ffffff/1280x720.png",
-      "https://placehold.jp/43ba57/ffffff/1280x720.png",
-    ],
-    url: "https://google.com/",
-    id: appid,
-  };
+import { GameMetaData } from "sugit_types/game";
+
+const getGameMetaData = async (appid: string): Promise<GameMetaData> => {
+  const response = await fetch("http://localhost:8080/get_metadata/" + appid);
+
+  if (!response.ok) {
+    throw "FETCH_GAME_METADATA_ERROR";
+  }
+
+  const response_json = await response.json();
+
+  return response_json;
 };
 
-export { getGameMetaData };
+const getThumbnail = async (appid: string) => {
+  if (appid.split("__")[0] === "steam") {
+    return `https://cdn.akamai.steamstatic.com/steam/apps/${
+      appid.split("__")[1]
+    }/capsule_sm_120.jpg`;
+  }
+
+  return (await getGameMetaData(appid)).thumbnail;
+};
+
+export { getGameMetaData, getThumbnail };

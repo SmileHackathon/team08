@@ -26,8 +26,6 @@ export default function GamePanel({
       <Panel className={styles.panel}>
         <Swiper
           modules={[Autoplay, Pagination]}
-          width={320}
-          height={180}
           slidesPerView={1}
           autoplay={{
             disableOnInteraction: false,

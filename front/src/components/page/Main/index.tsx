@@ -9,7 +9,9 @@ import DiscussionBoard from "../../model/discussion/DiscussionBoard";
 import SearchPanel from "../../ui/SearchPanel";
 
 import styles from "./styles.module.css";
-import SearchPanelSuggest from "../../ui/SearchPanelSuggest";
+import ListItem from "../../ui/ListItem";
+import GameThumbnail from "../../model/discussion/GameThumbnail";
+import GameSuggest from "../../model/discussion/GameSuggest";
 
 const debouncedSearch = debounce(
   1000,
@@ -91,9 +93,11 @@ export default function Main() {
             : searchResult.map((item, index) => {
                 /* TODO: SearchPanelSuggestにする */
                 return (
-                  <div key={index} onClick={onSearchResultClicked(item.appid)}>
-                    {item.name}
-                  </div>
+                  <GameSuggest
+                    key={index}
+                    game={item}
+                    onClick={onSearchResultClicked(item.appid)}
+                  />
                 );
               })}
         </SearchPanel>

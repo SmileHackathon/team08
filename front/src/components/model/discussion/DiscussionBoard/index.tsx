@@ -22,7 +22,7 @@ export default function DiscussionBoard({
           className={styles.gamePanel}
           style={{
             left: `${item.x * 100}%`,
-            top: `${item.y * 100}%`
+            top: `${item.y * 100}%`,
           }}
         >
           <Badge color="#ff3333">

@@ -1,4 +1,5 @@
 import express, { response } from "express";
+import cors from "cors";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import {
@@ -10,6 +11,8 @@ import getSteamGameMetaData from "./steam";
 
 const app = express();
 const httpServer = createServer(app);
+
+app.use(cors()); // TODO: ちゃんとCORS
 
 const io = new Server(httpServer, {
   cors: { origin: "*", methods: ["GET", "POST"] },
@@ -73,7 +76,7 @@ app.get("/get_metadata/:univ_app_id", (req, res) => {
         })
         .catch((result) => {
           res.status(404);
-          res.send(result);
+          res.send({ error: result });
         });
   }
 });
