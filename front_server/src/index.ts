@@ -2,12 +2,15 @@ import express, { response } from "express";
 import cors from "cors";
 import { createServer } from "http";
 import { Server } from "socket.io";
+import dotenv from "dotenv";
 import {
   changeDiscussion,
   createDiscussion,
   getDiscussion,
 } from "./discussion";
 import getSteamGameMetaData from "./steam";
+
+dotenv.config();
 
 const app = express();
 const httpServer = createServer(app);

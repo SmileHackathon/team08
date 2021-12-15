@@ -1,7 +1,9 @@
 import { GameMetaData } from "sugit_types/game";
 
 const getGameMetaData = async (appid: string): Promise<GameMetaData> => {
-  const response = await fetch("http://localhost:8080/get_metadata/" + appid);
+  const response = await fetch(
+    `${import.meta.env.FRONT_SERVER}/get_metadata/${appid}`
+  );
 
   if (!response.ok) {
     throw "FETCH_GAME_METADATA_ERROR";

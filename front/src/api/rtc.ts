@@ -49,7 +49,7 @@ export class RTC {
 }
 
 const createRTC = (): RTC => {
-  return new RTC(io("http://localhost:8080"));
+  return new RTC(io(import.meta.env.FRONT_SERVER));
 };
 
 export { createRTC };
