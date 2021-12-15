@@ -1,0 +1,183 @@
+@charset "utf-8";
+
+/* 基準値の指定 */
+:root {
+  font-size: 15px;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+a {
+  color: #acca00;
+  text-decoration: none;
+}
+
+a img {
+  border: none;
+}
+
+a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+p {
+  text-align: justify;
+}
+
+
+/* Skip Link */
+
+.skip {
+  font-size: 0.85rem;
+  background-color: #fff;
+  padding: 0.5rem 2rem;
+}
+
+
+/* Header */
+
+.Header {
+  display: block;
+  background-color: #fff;
+  padding: 1.5rem 2rem;
+}
+
+.Header a {
+  color: #444;
+}
+
+.Header a:hover {
+  color: #acca00;
+}
+
+.Header_Logo {
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+/* ナビゲーションメニューのスタイル */
+.Header_NavItems {
+  display: flex;
+  flex-wrap: nowrap;
+  list-style-type: none;
+  list-style-position: outside;
+  margin: 0;
+  padding: 0;
+}
+
+.Header_NavItem {
+  margin: 0 1rem 0 0;
+  text-transform: uppercase;
+}
+
+.Header_NavItem:last-child {
+  margin-right: 0;
+}
+
+@media all and (min-width: 600px) {
+  /* 600px以上でFlexboxを有効にしてレイアウトを切り替える */
+  .Header {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .Header_Logo {
+    margin: 0;
+  }
+
+  /* 600px以上のナビゲーションメニューのスタイル */
+  .Header_NavItem {
+    margin: 0 2rem 0 0;
+    text-transform: uppercase;
+  }
+}
+
+
+/* Footer */
+
+.Footer {
+  display: block;
+  background-color: #f4f4f4;
+  color: #444;
+  padding: 3rem 2rem 3rem;
+  margin-top: 2rem;
+}
+
+.Footer a {
+  color: #444;
+}
+
+.Footer a:hover {
+  color: #45c80d;
+}
+
+.Footer_NavItems {
+  list-style-type: none;
+  list-style-position: inside;
+  margin: 0 0 2rem;
+  padding: 0;
+  text-align: left;
+}
+
+.Footer_NavItem {
+  margin: 0;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.Footer_Company {
+  line-height: 1;
+  margin: 0 0 1rem;
+}
+
+.Footer_Company dt {
+  line-height: 1;
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.Footer_Company dd {
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+}
+
+.Footer_Social {
+  display: flex;
+  list-style-type: none;
+  list-style-position: outside;
+  margin: 0;
+  padding: 0;
+  font-size: 1.5rem;
+}
+
+.Footer_SocialItem {
+  margin: 0 0.5rem 0 0;
+}
+
+@media all and (min-width: 600px) {
+  /* 600px以上でFlexboxを有効にしてレイアウトを切り替える */
+  .Footer {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .Footer_NavItems {
+    text-align: right;
+  }
+}
+
+
+/* Main Content Base */
+
+#logo {
+    text-align : center;
+}
