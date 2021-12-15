@@ -13,7 +13,7 @@ import getSteamGameMetaData from "./steam";
 
 dotenv.config();
 
-if (process.env.mode === "development") {
+if (process.env.MODE === "development") {
   const envConfig = dotenv.parse(readFileSync('.env.development'));
   for (const k in envConfig) {
     process.env[k] = envConfig[k]
