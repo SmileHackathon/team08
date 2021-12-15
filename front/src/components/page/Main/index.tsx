@@ -92,11 +92,13 @@ export default function Main() {
                 position={{ x: item.x, y: item.y }}
                 onStop={onDragged(item.game.id)}
               >
-                <GamePanel game={item.game} className={styles.gamePanel}>
-                  <Badge color="#ff3333">
-                    {Object.values(item.approver).filter((b) => b).length}
-                  </Badge>
-                </GamePanel>
+                <div className={styles.dragArea}>
+                  <GamePanel game={item.game} className={styles.gamePanel}>
+                    <Badge color="#ff3333">
+                      {Object.values(item.approver).filter((b) => b).length}
+                    </Badge>
+                  </GamePanel>
+                </div>
               </Draggable>
             ))}
           </Board>
