@@ -11,7 +11,7 @@ import (
 
 type Game struct {
 	Id   int `json:"appid"`
-	Name string `json:name`
+	Name string `json:"name"`
 }
 
 var games[]Game
@@ -26,6 +26,8 @@ func main() {
 	if err := json.Unmarshal(bytes, &games); err != nil {
 		log.Fatal(err)
 	}
+
+	
 
 	// Gin
 	// r := gin.Default()
