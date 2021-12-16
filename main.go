@@ -10,11 +10,11 @@ import (
 )
 
 type Game struct {
-	Id   int `json:"appid"`
+	Id   int    `json:"appid"`
 	Name string `json:"name"`
 }
 
-var games[]Game
+var games []Game
 
 func main() {
 
@@ -41,10 +41,10 @@ func main() {
 
 // TODO: +区切りでAND検索をできるようにする
 func search(name string) []Game {
-	if(name == "") {
+	if name == "" {
 		return games
 	}
-	var result[] Game
+	var result []Game
 	r := regexp.MustCompile(name)
 	for _, game := range games {
 		if r.MatchString(game.Name) {
