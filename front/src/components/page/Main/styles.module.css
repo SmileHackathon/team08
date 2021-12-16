@@ -13,7 +13,6 @@
   top: 0;
   right: 0;
   width: 320px;
-  height: 100%;
 }
 
 .board {
@@ -25,8 +24,12 @@
 }
 
 .panelWrapper {
-  position: relative;
+  position: absolute;
   display: inline-block;
+}
+
+.panelWrapper:hover {
+  z-index: 1;
 }
 
 .gamePanel {
@@ -57,4 +60,8 @@
 
 .approvalButton {
   word-break: keep-all;
+}
+
+.canvas {
+  position: absolute;
 }

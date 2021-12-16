@@ -13,6 +13,7 @@ import Badge from "../../ui/Badge";
 import Board from "../../ui/Board";
 import GamePanel from "../../model/discussion/GamePanel";
 import Draggable from "react-draggable";
+import Canvas from "../../ui/Canvas";
 
 const debouncedSearch = debounce(
   500,
@@ -21,6 +22,9 @@ const debouncedSearch = debounce(
     resolve: (result: GameSearchResultItem[]) => void,
     reject: (error: string) => void
   ) => {
+    if (searchString.length === 0) {
+      return;
+    }
     console.log("検索開始");
     search(searchString)
       .then((result) => {
@@ -112,7 +116,14 @@ export default function Main() {
       <div className={styles.leftPane}>
         {discussionBoard.discussion ? (
           <Board className={styles.board}>
-            <canvas width={1280} height={720}></canvas>
+            <Canvas
+              width={1280}
+              height={720}
+              className={styles.canvas}
+              onDrawEnd={(url) => {
+                console.log(url.length);
+              }}
+            ></Canvas>
             {Object.values(discussionBoard.discussion.item).map((item) => (
               <Draggable
                 key={item.game.id}
@@ -160,7 +171,8 @@ export default function Main() {
         <SearchPanel value={searchString} onChange={onSearchStringChange}>
           {searchError
             ? searchError
-            : searchResult.map((item, index) => {
+            : searchResult.length > 0
+            ? searchResult.map((item, index) => {
                 /* TODO: SearchPanelSuggestにする */
                 return (
                   <GameSuggest
@@ -169,7 +181,8 @@ export default function Main() {
                     onClick={onSearchResultClicked(item.appid)}
                   />
                 );
-              })}
+              })
+            : null}
         </SearchPanel>
       </div>
     </div>

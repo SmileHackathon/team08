@@ -73,8 +73,8 @@ export default function useDiscussionRTC(discussId: string | null) {
     rtcRef.current?.updateDiscussion(discussId, {
       action: "addGameToArena",
       game: game,
-      x: Math.random(),
-      y: Math.random(),
+      x: 640 + (Math.random() - 0.5) * 200,
+      y: 360 + (Math.random() - 0.5) * 200,
       baseStateHash: discussion?.stateHash,
       user: rtcRef.current.socket.id, // TODO: なにかしらの永続化ID
     });

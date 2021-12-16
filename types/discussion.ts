@@ -14,7 +14,7 @@ export type Discussion = {
   item: {
     [appid: string]: DiscussionGameData;
   };
-  stateHash: string
+  stateHash: string;
 };
 
 export type DiscussionUpdateAction = { baseStateHash: string } & (
@@ -34,7 +34,8 @@ export type DiscussionUpdateAction = { baseStateHash: string } & (
       action: "disApproveGame";
       game_id: string;
       user: string;
-    } | {
+    }
+  | {
       action: "moveGame";
       game_id: string;
       x: number;
