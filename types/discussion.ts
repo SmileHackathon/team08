@@ -14,6 +14,7 @@ export type Discussion = {
   item: {
     [appid: string]: DiscussionGameData;
   };
+  canvas: string;
   stateHash: string;
 };
 
@@ -40,5 +41,9 @@ export type DiscussionUpdateAction = { baseStateHash: string } & (
       game_id: string;
       x: number;
       y: number;
+    }
+  | {
+      action: "updateCanvas";
+      canvas: string;
     }
 );

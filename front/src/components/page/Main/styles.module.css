@@ -9,7 +9,7 @@
 }
 
 .rightPane {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   width: 320px;
@@ -25,6 +25,8 @@
 
 .panelWrapper {
   position: absolute;
+  top: 0;
+  left: 0;
   display: inline-block;
 }
 

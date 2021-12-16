@@ -120,8 +120,9 @@ export default function Main() {
               width={1280}
               height={720}
               className={styles.canvas}
+              baseImage={discussionBoard.discussion.canvas}
               onDrawEnd={(url) => {
-                console.log(url.length);
+                discussionBoard.updateCanvas(url);
               }}
             ></Canvas>
             {Object.values(discussionBoard.discussion.item).map((item) => (

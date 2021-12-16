@@ -8,6 +8,7 @@ const createDiscussion = async (name: string): Promise<string> => {
     name: name,
     item: {},
     stateHash: "initial",
+    canvas: "",
   });
 
   return id;
@@ -138,6 +139,8 @@ const applyDiscussionUpdateAction = (
           },
         },
       };
+    case "updateCanvas":
+      return { ...base, canvas: action.canvas };
   }
   throw "UNDEFINED_ACTION";
 };

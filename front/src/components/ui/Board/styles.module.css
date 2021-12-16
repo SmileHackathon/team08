@@ -1,4 +1,4 @@
 .board {
-  /*background-image: url("./assets/board.svg");*/
   overflow: hidden;
+  border: solid 2px #545454;
 }

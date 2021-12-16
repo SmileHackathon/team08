@@ -118,6 +118,17 @@ export default function useDiscussionRTC(discussId: string | null) {
     });
   };
 
+  const updateCanvas = (canvas: string) => {
+    if (!discussId || !discussion) {
+      return;
+    }
+    rtcRef.current?.updateDiscussion(discussId, {
+      action: "updateCanvas",
+      canvas: canvas,
+      baseStateHash: discussion?.stateHash,
+    });
+  };
+
   return {
     isConnected,
     discussion,
@@ -126,6 +137,7 @@ export default function useDiscussionRTC(discussId: string | null) {
     moveGame,
     approveGame,
     disApproveGame,
+    updateCanvas,
     id,
   };
 }
