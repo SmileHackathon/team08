@@ -5,12 +5,12 @@
   height: 32px;
   overflow: hidden;
   background-color: #fff;
-  border: solid 2px #cccccc;
+  border: solid 2px #bbb;
   margin: 8px;
 }
 
 .button.active {
-  border: solid 2px #545454;
+  border: solid 2px var(--black);
 }
 
 .button::after {
@@ -20,5 +20,5 @@
   height: 4px;
   transform: translate(-50%, -50%) rotate(45deg);
 
-  background-color: #cccccc;
+  background-color: #bbb;
 }

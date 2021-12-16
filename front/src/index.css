@@ -8,3 +8,15 @@ html {
 * {
   box-sizing: border-box;
 }
+
+html {
+  --red: #df5f6a;
+  --green: #6ddca0;
+  --cyan: #6dc1e8;
+  --blue: #b2c2e3;
+  --brown: #cbad7c;
+  --pink: #fe92a0;
+  --main: #f3d024;
+  --sub: #c9e543;
+  --black: #545454;
+}
