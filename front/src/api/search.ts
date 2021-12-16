@@ -19,7 +19,7 @@ const normalizeSearchString = (searchString: string) => {
 
 export default async function search(searchString: string) {
   // eslint-disable-next-line no-irregular-whitespace
-  const searchStrings = searchString.split(/ |　/);
+  const searchStrings = normalizeSearchString(searchString).split(/ |　/);
   return allSteamApps
     .filter((app) => {
       const appName = normalizeSearchString(app.name);
@@ -32,5 +32,11 @@ export default async function search(searchString: string) {
         ...app,
         appid: "steam__" + app.appid,
       };
-    });
+    })
+    .sort((a, b) => a.name.length - b.name.length)
+    .sort(
+      (a, b) =>
+        normalizeSearchString(a.name).indexOf(searchStrings[0]) -
+        normalizeSearchString(b.name).indexOf(searchStrings[0])
+    );
 }

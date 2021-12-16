@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { MouseEventHandler, useCallback, useState } from "react";
 import { useParams } from "react-router";
 import search, { GameSearchResultItem } from "../../../api/search";
 import useDiscussion from "../../../hooks/useDiscussionRTC";
@@ -15,7 +15,7 @@ import GamePanel from "../../model/discussion/GamePanel";
 import Draggable from "react-draggable";
 
 const debouncedSearch = debounce(
-  1000,
+  500,
   (
     searchString: string,
     resolve: (result: GameSearchResultItem[]) => void,
@@ -50,10 +50,11 @@ export default function Main() {
     debouncedSearch(
       next,
       (result) => {
-        if (result.length <= 50) {
-          setSearchResult(result);
+        if (result.length <= 100) {
+          setSearchResult(result.slice(0, 10));
         } else {
-          setSearchError("検索結果が多すぎます(>50)");
+          setSearchResult(result.slice(0, 10));
+          //setSearchError(`省略して表示しています(全${result.length}件)`);
         }
       },
       () => {
@@ -65,6 +66,27 @@ export default function Main() {
   const onSearchResultClicked = (id: string) => async () => {
     const gameMetaData = await getGameMetaData(id);
     discussionBoard.addGameToArena(gameMetaData);
+  };
+
+  const onApprovalButtonClicked = (id: string) => async () => {
+    if (!discussionBoard.id || !discussionBoard.discussion?.item[id].approver) {
+      return;
+    }
+    console.log(discussionBoard.discussion.item[id]);
+    if (
+      discussionBoard.id in discussionBoard.discussion.item[id].approver &&
+      discussionBoard.discussion.item[id].approver[discussionBoard.id]
+    ) {
+      discussionBoard.disApproveGame(id);
+    } else {
+      discussionBoard.approveGame(id);
+    }
+  };
+
+  const onGamePanelControlMouseMoveCaptured: MouseEventHandler<
+    HTMLDivElement
+  > = (ev) => {
+    ev.stopPropagation();
   };
 
   const onDragged =
@@ -81,23 +103,51 @@ export default function Main() {
     return <div>接続失敗({discussionBoard.error})</div>;
   }
 
+  if (!discussionBoard.isConnected) {
+    return <div>接続中…</div>;
+  }
+
   return (
     <div className={styles.main}>
       <div className={styles.leftPane}>
         {discussionBoard.discussion ? (
           <Board className={styles.board}>
+            <canvas width={1280} height={720}></canvas>
             {Object.values(discussionBoard.discussion.item).map((item) => (
               <Draggable
                 key={item.game.id}
                 position={{ x: item.x, y: item.y }}
                 onStop={onDragged(item.game.id)}
               >
-                <div className={styles.dragArea}>
+                <div className={styles.panelWrapper}>
                   <GamePanel game={item.game} className={styles.gamePanel}>
                     <Badge color="#ff3333">
                       {Object.values(item.approver).filter((b) => b).length}
                     </Badge>
                   </GamePanel>
+                  <div
+                    className={styles.gamePanelControl}
+                    onMouseDownCapture={onGamePanelControlMouseMoveCaptured}
+                  >
+                    <a
+                      className={styles.detailsButton}
+                      href={item.game.url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      詳細を見る
+                    </a>
+                    {discussionBoard.id ? (
+                      <button
+                        className={styles.approvalButton}
+                        onClick={onApprovalButtonClicked(item.game.id)}
+                      >
+                        {item.approver[discussionBoard.id]
+                          ? "いいねを取り消す"
+                          : "いいねする"}
+                      </button>
+                    ) : null}
+                  </div>
                 </div>
               </Draggable>
             ))}

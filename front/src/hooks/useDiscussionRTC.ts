@@ -97,7 +97,7 @@ export default function useDiscussionRTC(discussId: string | null) {
       return;
     }
     rtcRef.current?.updateDiscussion(discussId, {
-      action: "approveGame",
+      action: "disApproveGame",
       game_id: game_id,
       user: id,
       baseStateHash: discussion?.stateHash,

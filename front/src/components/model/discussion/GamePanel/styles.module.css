@@ -1,12 +1,3 @@
-.wrapper {
-  position: absolute;
-  transition: transform ease-in-out 250ms;
-}
-
-.wrapper[class*="react-draggable-dragging"] {
-  transition: none;
-}
-
 .panel {
   position: relative;
   width: 320px;

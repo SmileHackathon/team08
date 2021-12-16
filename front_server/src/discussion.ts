@@ -99,19 +99,33 @@ const applyDiscussionUpdateAction = (
         },
       };
     case "disApproveGame":
-      return {
-        ...base,
-        item: {
-          ...base.item,
-          [action.game_id]: {
-            ...base.item[action.game_id],
-            approver: {
-              ...base.item[action.game_id].approver,
-              [action.user]: true,
+      if (
+        Object.values(base.item[action.game_id].approver).filter((b) => b)
+          .length === 1
+      ) {
+        const next = {
+          ...base,
+          item: {
+            ...base.item,
+          },
+        };
+        delete next.item[action.game_id];
+        return next;
+      } else {
+        return {
+          ...base,
+          item: {
+            ...base.item,
+            [action.game_id]: {
+              ...base.item[action.game_id],
+              approver: {
+                ...base.item[action.game_id].approver,
+                [action.user]: false,
+              },
             },
           },
-        },
-      };
+        };
+      }
     case "moveGame":
       return {
         ...base,

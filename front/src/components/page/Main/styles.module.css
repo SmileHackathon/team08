@@ -1,8 +1,6 @@
 .main {
-  display: flex;
   width: 100%;
   height: 100%;
-  flex-direction: row;
 }
 
 .leftPane {
@@ -11,12 +9,52 @@
 }
 
 .rightPane {
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 320px;
   height: 100%;
 }
 
 .board {
   position: relative;
-  aspect-ratio: calc(16 / 9);
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  width: 1280px;
+  height: 720px;
+}
+
+.panelWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.gamePanel {
+  transition: transform ease-in-out 250ms;
+}
+
+.panelWrapper:hover .gamePanel {
+  transform: scale(1.1);
+}
+
+.gamePanelControl {
+  position: absolute;
+  display: inline-flex;
+  visibility: hidden;
+  right: 100%;
+  bottom: 0;
+  height: 100%;
+  opacity: 0;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: opacity linear 250ms;
+}
+
+.panelWrapper:hover .gamePanelControl {
+  visibility: visible;
+  opacity: 1;
+}
+
+.approvalButton {
+  word-break: keep-all;
 }
