@@ -102,7 +102,6 @@ p {
 /* Footer */
 
 .Footer {
-  display: block;
   background-color: #f4f4f4;
   color: #444;
   padding: 3rem 2rem 3rem;
@@ -178,15 +177,39 @@ p {
 
 /* Main Content Base */
 
+.main {
+  display:flex;
+  flex-flow: column;
+  text-align : center;
+  position:relative;
+}
+
 .logo {
     text-align : center;
     margin: 0;
-    padding:0 0 0 0:
+    padding:0 0 0 0;
 }
 
 .Center_text {
+    display: block;
     text-align : center;
     width : 80%
     margin: 0 0 auto auto;
     padding: 0 0 0 0:
+}
+
+.btn-square {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: #668ad8;/*ボタン色*/
+  color: #FFF;
+  border-bottom: solid 4px #627295;
+  border-radius: 3px;
+}
+.btn-square:active {
+  /*ボタンを押したとき*/
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);/*下に動く*/
+  border-bottom: none;/*線を消す*/
 }
