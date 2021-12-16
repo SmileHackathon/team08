@@ -6,19 +6,18 @@ import { Discussion } from "sugit_types/discussion";
 import { GameMetaData } from "sugit_types/game";
 import discussionBoardState from "../components/atoms/DiscussionBoardAtom";
 
-type DiscussionRTC = {
+/*type DiscussionRTC = {
   isConnected: boolean;
   discussion: Discussion | null;
   error: string | null;
   addGameToArena: (game: GameMetaData) => void;
   moveGame: (gameId: string, pos: { x: number; y: number }) => void;
-};
+};*/
 
-export default function useDiscussionRTC(
-  discussId: string | null
-): DiscussionRTC {
+export default function useDiscussionRTC(discussId: string | null) {
   const [isConnected, setIsConnected] = useState(false);
   const [discussion, setDiscussion] = useState<Discussion | null>(null);
+  const [id, setId] = useState<string | null>(null);
 
   const [error, setError] = useState<string | null>(null);
 
@@ -35,6 +34,7 @@ export default function useDiscussionRTC(
     };
     socket.on("connect", async () => {
       onConnectionStateChange();
+      setId(socket.id);
 
       if (discussId) {
         try {
@@ -80,6 +80,30 @@ export default function useDiscussionRTC(
     });
   };
 
+  const approveGame = (game_id: string) => {
+    if (!discussId || !id || !discussion) {
+      return;
+    }
+    rtcRef.current?.updateDiscussion(discussId, {
+      action: "approveGame",
+      game_id: game_id,
+      user: id,
+      baseStateHash: discussion?.stateHash,
+    });
+  };
+
+  const disApproveGame = (game_id: string) => {
+    if (!discussId || !id || !discussion) {
+      return;
+    }
+    rtcRef.current?.updateDiscussion(discussId, {
+      action: "approveGame",
+      game_id: game_id,
+      user: id,
+      baseStateHash: discussion?.stateHash,
+    });
+  };
+
   const moveGame = (gameId: string, { x, y }: { x: number; y: number }) => {
     if (!discussId || !discussion) {
       return;
@@ -100,6 +124,9 @@ export default function useDiscussionRTC(
     error,
     addGameToArena,
     moveGame,
+    approveGame,
+    disApproveGame,
+    id,
   };
 }
 
