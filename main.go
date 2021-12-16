@@ -2,8 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
-	// "github.com/gin-gonic/gin"
+	// "fmt"
+	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"log"
 	"regexp"
@@ -27,21 +27,23 @@ func main() {
 		log.Fatal(err)
 	}
 
-	
-
 	// Gin
-	// r := gin.Default()
-	// r.GET("/", func(c *gin.Context) {
-	// 	keyword := c.Query("keyword")
-	// 	founds := search(keyword)
-	// 	c.JSON(200, )
-	// }
+	r := gin.Default()
+	r.GET("/", func(c *gin.Context) {
+		keyword := c.Query("keyword")
+		founds := search(keyword)
+		founds_json, _ := json.Marshal(founds)
+		c.JSON(200, string(founds_json))
+	})
 
-	// r.Run() // Run Gin
+	r.Run() // Run Gin
 }
 
 // TODO: +区切りでAND検索をできるようにする
 func search(name string) []Game {
+	if(name == "") {
+		return games
+	}
 	var result[] Game
 	r := regexp.MustCompile(name)
 	for _, game := range games {
