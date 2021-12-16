@@ -6,25 +6,17 @@ import (
 	// "github.com/gin-gonic/gin"
 	"io/ioutil"
 	"log"
+	"regexp"
 )
 
 type Game struct {
-	Id   int    `json:"appid"`
+	Id   int `json:"appid"`
 	Name string `json:name`
 }
 
 var games[]Game
 
 func main() {
-
-	// Gin
-	// r := gin.Default()
-	// r.GET("/", func(c *gin.Context) {
-	// 	keyword := c.Query("keyword")
-	// 	c.JSON(200, gin.H{
-	// 		"message": keyword,
-	// 	})
-	// })
 
 	// JSON
 	bytes, err := ioutil.ReadFile("data/steam_all_apps.json")
@@ -33,9 +25,27 @@ func main() {
 	}
 	if err := json.Unmarshal(bytes, &games); err != nil {
 		log.Fatal(err)
-	} else {
-		fmt.Println("JSON Loaded")
 	}
 
+	// Gin
+	// r := gin.Default()
+	// r.GET("/", func(c *gin.Context) {
+	// 	keyword := c.Query("keyword")
+	// 	founds := search(keyword)
+	// 	c.JSON(200, )
+	// }
+
 	// r.Run() // Run Gin
+}
+
+// TODO: +区切りでAND検索をできるようにする
+func search(name string) []Game {
+	var result[] Game
+	r := regexp.MustCompile(name)
+	for _, game := range games {
+		if r.MatchString(game.Name) {
+			result = append(result, game)
+		}
+	}
+	return result
 }
