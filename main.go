@@ -32,8 +32,8 @@ func main() {
 	r.GET("/", func(c *gin.Context) {
 		keyword := c.Query("keyword")
 		founds := search(keyword)
-		founds_json, _ := json.Marshal(founds)
-		c.JSON(200, string(founds_json))
+		// founds_json, _ := json.Marshal(founds)
+		c.JSON(200, founds)
 	})
 
 	r.Run() // Run Gin
