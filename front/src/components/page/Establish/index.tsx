@@ -16,7 +16,7 @@ const Establish = () => {
     createDiscussion(data.discussionTitle)
       .then((discussionId) => {
         console.log("完了", discussionId);
-        navigate(`/discussion/${discussionId}`);
+        navigate(`/${discussionId}`);
       })
       .catch((error) => {
         console.log("失敗");

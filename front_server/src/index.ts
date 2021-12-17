@@ -106,11 +106,10 @@ app.get("/get_metadata/:univ_app_id", (req, res) => {
 });
 
 app.use(express.static(path.join("public")));
-app.use(express.static(path.join("public")));
 
 // Fallback to SPA
-app.get("*", (req, res) => {
-  res.sendFile(path.join("public", "index.html"));
+app.get("/app/*", (req, res) => {
+  res.sendFile(path.resolve("public", "app", "index.html"));
 });
 
 console.log("ready");
