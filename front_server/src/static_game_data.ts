@@ -15,9 +15,11 @@ export default async function getStaticGameMetaData(
   return {
     name: data_map[game_id].name,
     thumbnail: `/recommends/${id}/logo.png`,
-    images: (await readdir(path.join("public", "recommends", id, "img"))).map(
-      (fileName) => `/recommends/${id}/img/${fileName}`
-    ),
+    images: (
+      await readdir(
+        path.join("public", "recommends", id.replace("/", "_"), "img")
+      )
+    ).map((fileName) => `/recommends/${id}/img/${fileName}`),
     url: data_map[game_id].url,
     id: id,
   };
