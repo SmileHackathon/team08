@@ -7,6 +7,10 @@
   box-sizing: content-box;
   user-select: none;
   pointer-events: none;
+
+  background: linear-gradient(#545454, #000);
+
+  background-position: 0 50%;
 }
 
 .image {
