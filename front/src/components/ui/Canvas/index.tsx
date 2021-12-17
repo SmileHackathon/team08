@@ -95,7 +95,7 @@ export default function Canvas({
         context.closePath();
       }
       setLastPos([x, y]);
-      console.log(x, y);
+      // console.log(x, y);
     },
     [isDrawing, context, lastX, lastY]
   );
@@ -134,7 +134,7 @@ export default function Canvas({
     if (!context || !baseImage) {
       return;
     }
-    console.log("draw", baseImage);
+    // console.log("draw", baseImage);
 
     const img = new Image();
     img.src = baseImage;

@@ -35,13 +35,13 @@ export class RTC {
 
   private emitRTC(type: string, data?: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      console.log("[RTC] emit", type, data);
+      // console.log("[RTC] emit", type, data);
       this.socket.emit(type, data, (response: any) => {
         if (response["error"] !== undefined) {
-          console.log("[RTC] ERROR ACK", response);
+          // console.log("[RTC] ERROR ACK", response);
           reject(response["error"]);
         }
-        console.log("[RTC] ACK", response);
+        // console.log("[RTC] ACK", response);
         resolve(response);
       });
     });

@@ -74,3 +74,8 @@
   right: 16px;
   width: 320px;
 }
+
+.pureWrapper {
+  display: inline-block;
+  transition: transform linear 250ms 0;
+}

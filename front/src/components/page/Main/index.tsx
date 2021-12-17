@@ -32,10 +32,10 @@ const debouncedSearch = debounce(
     if (searchString.length === 0) {
       return;
     }
-    console.log("検索開始");
+    // console.log("検索開始");
     search(searchString)
       .then((result) => {
-        console.log("検索完了");
+        // console.log("検索完了");
         resolve(result);
       })
       .catch((error) => {
@@ -57,7 +57,7 @@ export default function Main() {
   const [recommends, setRecommends] = useState<Recommend[] | null>(null);
 
   const onSearchStringChange = (next: string) => {
-    console.log("onsearchstringchange");
+    // console.log("onsearchstringchange");
     setSearchString(next);
     setSearchError(null);
     debouncedSearch(
@@ -85,7 +85,7 @@ export default function Main() {
     if (!discussionBoard.id || !discussionBoard.discussion?.item[id].approver) {
       return;
     }
-    console.log(discussionBoard.discussion.item[id]);
+    // console.log(discussionBoard.discussion.item[id]);
     if (
       discussionBoard.id in discussionBoard.discussion.item[id].approver &&
       discussionBoard.discussion.item[id].approver[discussionBoard.id]
@@ -147,33 +147,44 @@ export default function Main() {
                 onStop={onDragged(item.game.id)}
               >
                 <div className={styles.panelWrapper}>
-                  <GamePanel game={item.game} className={styles.gamePanel}>
-                    <Badge color="#ff3333">
-                      {Object.values(item.approver).filter((b) => b).length}
-                    </Badge>
-                  </GamePanel>
                   <div
-                    className={styles.gamePanelControl}
-                    onMouseDownCapture={onGamePanelControlMouseMoveCaptured}
+                    className={styles.pureWrapper}
+                    style={{
+                      transform: `scale(${
+                        1.0 +
+                        Object.values(item.approver).filter((b) => b).length *
+                          0.2
+                      })`,
+                    }}
                   >
-                    <a
-                      className={styles.detailsButton}
-                      href={item.game.url}
-                      target="_blank"
-                      rel="noreferrer"
+                    <GamePanel game={item.game} className={styles.gamePanel}>
+                      <Badge color="#ff3333">
+                        {Object.values(item.approver).filter((b) => b).length}
+                      </Badge>
+                    </GamePanel>
+                    <div
+                      className={styles.gamePanelControl}
+                      onMouseDownCapture={onGamePanelControlMouseMoveCaptured}
                     >
-                      詳細を見る
-                    </a>
-                    {discussionBoard.id ? (
-                      <button
-                        className={styles.approvalButton}
-                        onClick={onApprovalButtonClicked(item.game.id)}
+                      <a
+                        className={styles.detailsButton}
+                        href={item.game.url}
+                        target="_blank"
+                        rel="noreferrer"
                       >
-                        {item.approver[discussionBoard.id]
-                          ? "いいねを取り消す"
-                          : "いいねする"}
-                      </button>
-                    ) : null}
+                        詳細を見る
+                      </a>
+                      {discussionBoard.id ? (
+                        <button
+                          className={styles.approvalButton}
+                          onClick={onApprovalButtonClicked(item.game.id)}
+                        >
+                          {item.approver[discussionBoard.id]
+                            ? "いいねを取り消す"
+                            : "いいねする"}
+                        </button>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </Draggable>

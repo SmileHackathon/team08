@@ -12,14 +12,14 @@ const Establish = () => {
   const [error, setError] = useState<string | null>(null);
 
   const onSubmit = (data: any) => {
-    console.log("ディスカッションを作成");
+    // console.log("ディスカッションを作成");
     createDiscussion(data.discussionTitle)
       .then((discussionId) => {
-        console.log("完了", discussionId);
+        // console.log("完了", discussionId);
         navigate(`/${discussionId}`);
       })
       .catch((error) => {
-        console.log("失敗");
+        // console.log("失敗");
         setError(`ディスカッションの作成に失敗しました(${error})`);
       });
   };

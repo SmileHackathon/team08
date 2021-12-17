@@ -55,7 +55,7 @@ export default function useDiscussionRTC(discussId: string | null) {
     socket.on(
       "updated",
       ({ discussion_id: received_discussion_id, discussion }) => {
-        console.log("updated", received_discussion_id, discussion);
+        // console.log("updated", received_discussion_id, discussion);
         if (received_discussion_id !== discussId) {
           return;
         }
