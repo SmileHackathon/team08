@@ -3,20 +3,21 @@ import cors from "cors";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import dotenv from "dotenv";
-import {readFileSync} from "fs"
+import { readFileSync } from "fs";
 import {
   changeDiscussion,
   createDiscussion,
   getDiscussion,
 } from "./discussion";
 import getSteamGameMetaData from "./steam";
+import path from "path";
 
 dotenv.config();
 
 if (process.env.MODE === "development") {
-  const envConfig = dotenv.parse(readFileSync('.env.development'));
+  const envConfig = dotenv.parse(readFileSync(".env.development"));
   for (const k in envConfig) {
-    process.env[k] = envConfig[k]
+    process.env[k] = envConfig[k];
   }
 }
 
@@ -92,6 +93,11 @@ app.get("/get_metadata/:univ_app_id", (req, res) => {
   }
 });
 
-console.log("running");
+app.use(express.static(path.join(__dirname, "public")));
+
+// Fallback to SPA
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 httpServer.listen(process.env.PORT || 80);

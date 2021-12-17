@@ -4,12 +4,16 @@
     "scripts": {
         "prepare": "./bin/prepare.sh",
         "build": "./bin/build.sh",
-        "check": "npm -w front run check"
+        "check": "npm -w front run check",
+        "start": "concurrently 'npm -w front_server run start'"
     },
     "private": true,
     "workspaces": [
         "front",
         "front_server",
         "types"
-    ]
+    ],
+    "dependencies": {
+        "concurrently": "^6.5.0"
+    }
 }

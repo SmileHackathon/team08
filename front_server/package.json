@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp -r public dist",
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts"
   },
