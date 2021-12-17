@@ -91,6 +91,7 @@ app.get("/get_metadata/:univ_app_id", (req, res) => {
           res.status(404);
           res.send({ error: result });
         });
+      break;
     case "static":
       getStaticGameMetaData(id)
         .then((result) => {
@@ -100,15 +101,16 @@ app.get("/get_metadata/:univ_app_id", (req, res) => {
           res.status(404);
           res.send({ error: result });
         });
+      break;
   }
 });
 
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join("public")));
+app.use(express.static(path.join("public")));
 
 // Fallback to SPA
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join("public", "index.html"));
 });
 
 console.log("ready");

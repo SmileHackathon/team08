@@ -5,7 +5,8 @@
     "prepare": "./bin/prepare.sh",
     "build": "./bin/build.sh",
     "check": "npm -w front run check",
-    "start": "concurrently 'npm -w front_server run start'"
+    "start": "concurrently 'npm -w front_server run start'",
+    "dev": "npm run build && env MODE=development concurrently --kill-others 'npm -w front run dev' 'npm -w front_server run dev'"
   },
   "private": true,
   "workspaces": [

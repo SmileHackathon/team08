@@ -20,11 +20,11 @@ const getThumbnail = async (appid: string) => {
     return `https://cdn.akamai.steamstatic.com/steam/apps/${
       appid.split("__")[1]
     }/capsule_sm_120.jpg`;
-  } else {
-    return "";
   }
 
-  //return (await getGameMetaData(appid)).thumbnail;
+  return `${import.meta.env.VITE_FRONT_SERVER}${
+    (await getGameMetaData(appid)).thumbnail
+  }`;
 };
 
 export { getGameMetaData, getThumbnail };
