@@ -1,3 +1,4 @@
+import { createClient } from "redis";
 import { Discussion, DiscussionUpdateAction } from "sugit_types/discussion";
 
 const discussionMapTempolary = new Map<string, Discussion>();
@@ -17,7 +18,21 @@ const createDiscussion = async (name: string): Promise<string> => {
 const getDiscussion = async (
   discussionId: string
 ): Promise<Discussion | undefined> => {
-  return discussionMapTempolary.get(discussionId);
+  const mayDiscussion = discussionMapTempolary.get(discussionId);
+  if (mayDiscussion) {
+    return mayDiscussion;
+  } else {
+    const client = createClient();
+    await client.connect();
+    const result = await client.get(discussionId);
+    await client.disconnect();
+
+    if (result) {
+      return JSON.parse(result);
+    } else {
+      return undefined;
+    }
+  }
 };
 
 const updateDiscussion = async (
@@ -28,7 +43,16 @@ const updateDiscussion = async (
     ...discussion,
     stateHash: Math.random().toString(),
   };
+
+  setImmediate(async () => {
+    const client = createClient();
+    await client.connect();
+    await client.set(discussionId, JSON.stringify(newDiscussion));
+    await client.disconnect();
+  });
+
   discussionMapTempolary.set(discussionId, newDiscussion);
+
   return newDiscussion;
 };
 
