@@ -1,0 +1,12 @@
+.button {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  border: solid 2px rgba(0, 0, 0, 0%);
+  box-sizing: border-box;
+  margin: 2px;
+}
+
+.button.active {
+  border: solid 2px #545454;
+}

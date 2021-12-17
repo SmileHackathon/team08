@@ -1,0 +1,9 @@
+.wrapper {
+  position: relative;
+}
+
+.control {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+}

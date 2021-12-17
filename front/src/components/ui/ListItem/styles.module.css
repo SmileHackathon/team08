@@ -1,0 +1,12 @@
+.suggest {
+  padding: 16px 8px;
+  border-bottom: solid 1px #eee;
+}
+
+.suggest:hover {
+  background-color: rgba(0 0 0 5%);
+}
+
+.suggest:last-child {
+  border-bottom: none;
+}

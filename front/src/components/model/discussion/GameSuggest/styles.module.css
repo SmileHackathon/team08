@@ -1,0 +1,24 @@
+.suggest {
+  display: flex;
+  padding: 16px 8px;
+  border-bottom: solid 1px #eee;
+}
+
+.suggest:hover {
+  background-color: rgba(0 0 0 5%);
+}
+
+.suggest:last-child {
+  border-bottom: none;
+}
+
+.name {
+  flex-grow: 1;
+}
+
+.thumbnail {
+  flex: 0 0;
+  width: 60px;
+  height: auto;
+  object-fit: contain;
+}

@@ -1,0 +1,4 @@
+.board {
+  overflow: hidden;
+  border: solid 2px #545454;
+}
