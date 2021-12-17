@@ -8,7 +8,7 @@ export default async function getSteamGameMetaData(
     `https://store.steampowered.com/api/appdetails?appids=${appId}`,
     {
       headers: {
-        "User-Agent": "sugit/1.0 cathiecode gmail com",
+        "User-Agent": "suggit/1.0 cathiecode gmail com",
       },
     }
   );

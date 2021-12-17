@@ -1,4 +1,4 @@
-# sugit
+# SuggIt
 
 ### npm scripts
 
