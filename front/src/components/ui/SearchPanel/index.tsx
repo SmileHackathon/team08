@@ -14,12 +14,10 @@ export default function SearchPanel(props: {
   value?: string;
   onChange?: (value: string) => void;
 }) {
-  /*const [input, setInput] = useState<string>("");*/
   const [supressSuggest, setSupressSuggest] = useState<boolean>(false);
 
   const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
     (ev) => {
-      //setInput(ev.target.value);
       setSupressSuggest(false);
 
       props.onChange && props.onChange(ev.target.value ?? "");
@@ -27,20 +25,14 @@ export default function SearchPanel(props: {
     [props]
   );
 
-  const onChildrenChange = () => {
-    setSupressSuggest(false);
-  };
-
   const onSupressButtonClicked = useCallback(() => {
     setSupressSuggest(true);
   }, []);
 
   const onValueChange = () => {
-    /*props.value && setInput(props.value);*/
     setSupressSuggest(false);
   };
 
-  useEffect(onChildrenChange, [props.children]);
   useEffect(onValueChange, [props.value]);
 
   const openSuggest = props.children && !supressSuggest;

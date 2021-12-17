@@ -15,13 +15,16 @@ const getGameMetaData = async (appid: string): Promise<GameMetaData> => {
 };
 
 const getThumbnail = async (appid: string) => {
-  if (appid.split("__")[0] === "steam") {
+  const service = appid.split("__")[0];
+  if (service === "steam") {
     return `https://cdn.akamai.steamstatic.com/steam/apps/${
       appid.split("__")[1]
     }/capsule_sm_120.jpg`;
+  } else {
+    return "";
   }
 
-  return (await getGameMetaData(appid)).thumbnail;
+  //return (await getGameMetaData(appid)).thumbnail;
 };
 
 export { getGameMetaData, getThumbnail };

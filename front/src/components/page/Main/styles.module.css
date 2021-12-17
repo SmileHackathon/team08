@@ -67,3 +67,10 @@
 .canvas {
   position: absolute;
 }
+
+.recommendation {
+  position: fixed !important;
+  bottom: 16px;
+  right: 16px;
+  width: 320px;
+}

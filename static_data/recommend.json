@@ -1,0 +1,142 @@
+{
+  "steam__559650": {
+    "name": "Witch It",
+    "url": "https://store.steampowered.com/app/559650/Witch_It/",
+    "appid": "steam__559650"
+  },
+  "steam__945360": {
+    "name": "Among Us",
+    "url": "https://store.steampowered.com/app/945360/Among_Us/",
+    "appid": "steam__945360"
+  },
+  "steam__774861": {
+    "name": "Project Winter",
+    "url": "https://store.steampowered.com/app/774861/Project_Winter/",
+    "appid": "steam__774861"
+  },
+  "steam__381210": {
+    "name": "Dead by Daylight",
+    "url": "https://store.steampowered.com/app/381210/Dead_by_Daylight/",
+    "appid": "steam__381210"
+  },
+  "steam__289070": {
+    "name": "Sid Meier’s Civilization® VI",
+    "url": "https://store.steampowered.com/app/289070/Sid_Meiers_Civilization_VI/",
+    "appid": "steam__289070"
+  },
+  "steam__1407200": {
+    "name": "World of Tanks",
+    "url": "https://store.steampowered.com/app/1407200/World_of_Tanks/?snr=1_1510_4__118",
+    "appid": "steam__1407200"
+  },
+  "steam__477160": {
+    "name": "Human: Fall Flat",
+    "url": "https://store.steampowered.com/app/477160/Human_Fall_Flat/",
+    "appid": "steam__477160"
+  },
+  "steam__648800": {
+    "name": "Raft",
+    "url": "https://store.steampowered.com/app/648800/Raft/",
+    "appid": "steam__648800"
+  },
+  "steam__431240": {
+    "name": "Golf With Your Friends",
+    "url": "https://store.steampowered.com/app/431240/Golf_With_Your_Friends/",
+    "appid": "steam__431240"
+  },
+  "steam__728880": {
+    "name": "Overcooked! 2",
+    "url": "https://store.steampowered.com/app/728880/Overcooked_2/",
+    "appid": "steam__728880"
+  },
+  "steam__1016920": {
+    "name": "Unrailed!",
+    "url": "https://store.steampowered.com/app/1016920/Unrailed/",
+    "appid": "steam__1016920"
+  },
+  "steam__470220": {
+    "name": "UNO",
+    "url": "https://store.steampowered.com/app/470220/UNO/",
+    "appid": "steam__470220"
+  },
+  "steam__702890": {
+    "name": "BlazBlue: Cross Tag Battle",
+    "url": "https://store.steampowered.com/app/702890/BlazBlue_Cross_Tag_Battle/",
+    "appid": "steam__702890"
+  },
+  "steam__1384160": {
+    "name": "GUILTY GEAR -STRIVE-",
+    "url": "https://store.steampowered.com/app/1384160/GUILTY_GEAR_STRIVE/",
+    "appid": "steam__1384160"
+  },
+  "steam__1795170": {
+    "name": "超将棋",
+    "url": "https://store.steampowered.com/app/1795170/_/",
+    "appid": "steam__1795170"
+  },
+  "steam__550": {
+    "name": "Left 4 Dead 2",
+    "url": "https://store.steampowered.com/app/550/Left_4_Dead_2/?l=japanese",
+    "appid": "steam__550"
+  },
+  "steam__582010": {
+    "name": "Monster Hunter: World",
+    "url": "https://store.steampowered.com/app/582010/Monster_Hunter_World/",
+    "appid": "steam__582010"
+  },
+  "steam__1446780": {
+    "name": "MONSTER HUNTER RISE",
+    "url": "https://store.steampowered.com/app/1446780/MONSTER_HUNTER_RISE/",
+    "appid": "steam__1446780"
+  },
+  "steam__453480": {
+    "name": "Shadowverse CCG",
+    "url": "https://store.steampowered.com/app/453480/Shadowverse_CCG/",
+    "appid": "steam__453480"
+  },
+  "steam__285900": {
+    "name": "Gang Beasts",
+    "url": "https://store.steampowered.com/app/285900/Gang_Beasts/?l=japanese",
+    "appid": "steam__285900"
+  },
+  "steam__638070": {
+    "name": "Murderous Pursuits",
+    "url": "https://store.steampowered.com/app/638070/Murderous_Pursuits/",
+    "appid": "steam__638070"
+  },
+  "steam__466240": {
+    "name": "Deceit",
+    "url": "https://store.steampowered.com/app/466240/Deceit/",
+    "appid": "steam__466240"
+  },
+  "static__valorant": {
+    "name": "VALORANT",
+    "url": "https://playvalorant.com/ja-jp/",
+    "appid": "static__valorant"
+  },
+  "static__god-field": {
+    "name": "god field",
+    "url": "https://godfield.net/",
+    "appid": "static__god-field"
+  },
+  "static__garctic-phone": {
+    "name": "Gartic PHONE",
+    "url": "https://garticphone.com/ja",
+    "appid": "static__garctic-phone"
+  },
+  "static__tetrio": {
+    "name": "tetr.io",
+    "url": "https://tetr.io/",
+    "appid": "static__tetrio"
+  },
+  "static__jantama": {
+    "name": "雀魂",
+    "url": "https://mahjongsoul.com/",
+    "appid": "static__jantama"
+  },
+  "static__game-no-tubo": {
+    "name": "ゲームのツボ",
+    "url": "https://www.afsgames.com/",
+    "appid": "static__game-no-tubo"
+  }
+}

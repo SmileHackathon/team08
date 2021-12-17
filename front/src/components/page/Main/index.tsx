@@ -1,4 +1,9 @@
-import React, { MouseEventHandler, useCallback, useState } from "react";
+import React, {
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { useParams } from "react-router";
 import search, { GameSearchResultItem } from "../../../api/search";
 import useDiscussion from "../../../hooks/useDiscussionRTC";
@@ -14,6 +19,8 @@ import Board from "../../ui/Board";
 import GamePanel from "../../model/discussion/GamePanel";
 import Draggable from "react-draggable";
 import Canvas from "../../ui/Canvas";
+import getRecommend, { Recommend } from "../../../api/recommend";
+import Accordion from "../../ui/Accordion";
 
 const debouncedSearch = debounce(
   500,
@@ -46,6 +53,8 @@ export default function Main() {
   const [searchString, setSearchString] = useState("");
   const [searchResult, setSearchResult] = useState<GameSearchResultItem[]>([]);
   const [searchError, setSearchError] = useState<string | null>(null);
+
+  const [recommends, setRecommends] = useState<Recommend[] | null>(null);
 
   const onSearchStringChange = (next: string) => {
     console.log("onsearchstringchange");
@@ -98,6 +107,12 @@ export default function Main() {
     (e: any, { x, y }: { x: number; y: number }) => {
       discussionBoard.moveGame(id, { x, y });
     };
+
+  useEffect(() => {
+    getRecommend().then((result) => {
+      setRecommends(Object.values(result));
+    });
+  }, []);
 
   if (!discussId) {
     return <div>ディスカッションIDが指定されていません</div>;
@@ -185,6 +200,15 @@ export default function Main() {
               })
             : null}
         </SearchPanel>
+        <Accordion className={styles.recommendation} text="運営からのおすすめ">
+          {recommends?.map((item, index) => (
+            <GameSuggest
+              key={index}
+              game={item}
+              onClick={onSearchResultClicked(item.appid)}
+            />
+          ))}
+        </Accordion>
       </div>
     </div>
   );

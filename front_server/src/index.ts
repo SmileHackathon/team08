@@ -11,6 +11,7 @@ import {
 } from "./discussion";
 import getSteamGameMetaData from "./steam";
 import path from "path";
+import getStaticGameMetaData from "./static_game_data";
 
 dotenv.config();
 
@@ -90,14 +91,26 @@ app.get("/get_metadata/:univ_app_id", (req, res) => {
           res.status(404);
           res.send({ error: result });
         });
+    case "static":
+      getStaticGameMetaData(id)
+        .then((result) => {
+          res.send(result);
+        })
+        .catch((result) => {
+          res.status(404);
+          res.send({ error: result });
+        });
   }
 });
 
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "public")));
 
 // Fallback to SPA
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
+
+console.log("ready");
 
 httpServer.listen(process.env.PORT || 80);
