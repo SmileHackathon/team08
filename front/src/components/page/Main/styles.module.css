@@ -53,6 +53,11 @@
   flex-direction: column;
   justify-content: flex-end;
   transition: opacity linear 250ms;
+  border-radius: 8px;
+  padding: 8px;
+  background-color: #fff;
+  text-align: center;
+  border: solid 1px #eee;
 }
 
 .panelWrapper:hover .gamePanelControl {
@@ -60,8 +65,20 @@
   opacity: 1;
 }
 
+.detailsButton {
+  color: #6dc1e8;
+}
+
 .approvalButton {
   word-break: keep-all;
+  background: none;
+  border: none;
+  padding: none;
+  color: #545454;
+}
+
+.approvalButton.approving {
+  color: #fe92a0;
 }
 
 .canvas {

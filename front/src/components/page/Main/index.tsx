@@ -21,6 +21,14 @@ import Draggable from "react-draggable";
 import Canvas from "../../ui/Canvas";
 import getRecommend, { Recommend } from "../../../api/recommend";
 import Accordion from "../../ui/Accordion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHeart as faHeartSolid,
+  faInfoCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+import classNames from "classnames";
+import colorByMembers from "../../../helpers/colorByMembers";
 
 const debouncedSearch = debounce(
   500,
@@ -153,12 +161,16 @@ export default function Main() {
                       transform: `scale(${
                         1.0 +
                         Object.values(item.approver).filter((b) => b).length *
-                          0.2
+                          0.1
                       })`,
                     }}
                   >
                     <GamePanel game={item.game} className={styles.gamePanel}>
-                      <Badge color="#ff3333">
+                      <Badge
+                        color={colorByMembers(
+                          Object.values(item.approver).filter((b) => b).length
+                        )}
+                      >
                         {Object.values(item.approver).filter((b) => b).length}
                       </Badge>
                     </GamePanel>
@@ -172,16 +184,21 @@ export default function Main() {
                         target="_blank"
                         rel="noreferrer"
                       >
-                        詳細を見る
+                        <FontAwesomeIcon icon={faInfoCircle} />
                       </a>
                       {discussionBoard.id ? (
                         <button
-                          className={styles.approvalButton}
+                          className={classNames(styles.approvalButton, {
+                            [styles.approving]:
+                              item.approver[discussionBoard.id],
+                          })}
                           onClick={onApprovalButtonClicked(item.game.id)}
                         >
-                          {item.approver[discussionBoard.id]
-                            ? "いいねを取り消す"
-                            : "いいねする"}
+                          {item.approver[discussionBoard.id] ? (
+                            <FontAwesomeIcon icon={faHeartSolid} />
+                          ) : (
+                            <FontAwesomeIcon icon={faHeartRegular} />
+                          )}
                         </button>
                       ) : null}
                     </div>
