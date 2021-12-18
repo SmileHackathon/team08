@@ -36,7 +36,6 @@ p {
   padding: 0.5rem 2rem;
 }
 
-
 /* Header */
 
 .Header {
@@ -50,7 +49,7 @@ p {
 }
 
 .Header a:hover {
-  color: #acca00;
+  color: #d4fa00;
 }
 
 .Header_Logo {
